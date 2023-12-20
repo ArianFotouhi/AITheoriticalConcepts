@@ -12,3 +12,10 @@ Self-attention allows each word/token in a sequence to consider dependencies bet
 
 # A Frequent Question! What's difference of Attention and Self-Attention?
 In traditional attention mechanisms, such as those used in sequence-to-sequence models like the encoder-decoder architecture in machine translation, attention helps the model focus on specific parts of the input sequence while generating the output sequence. However, self-attention, introduced in models like the Transformer, allows each element in a sequence to attend to all other elements in the same sequence. This means that every word in an input sentence, for example, can be connected to and influence the representation of every other word in the sentence.
+
+# Self Attention Numeric Example
+In Self-Attnetion process uses below formula where Q is the query of focused word, K^T is matrix of other words (rest of input tokens) keys and V represents the vector of all values (including the attended word).
+
+Attention(Q, K) = softmax( QK^T / sqrt(d_k) ) * V
+
+

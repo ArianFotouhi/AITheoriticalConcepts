@@ -20,7 +20,7 @@ Attention(Q, K) = softmax( QK^T / sqrt(d_k) ) * V
 
 # Steps
 ## Input Encoding
-Sentence: "The dog is sitting on the mat."
+Sentence: "The sitting dog."
 This sentence gets broken into tokens (words or subwords) and then embedded into vectors. Each token (word) has three vector 
 
 representations: Query, Key, and Value.
@@ -30,13 +30,9 @@ For instance:
 
 "dog": Query = [0.4, 0.6, 0.2], Key = [0.2, 0.4, 0.7], Value = [0.5, 0.3, 0.9]
 
-"is": Query = [0.1, 0.3, 0.2], Key = [0.3, 0.5, 0.4], Value = [0.2, 0.1, 0.7]
-
 "sitting": Query = [0.3, 0.4, 0.1], Key = [0.4, 0.3, 0.5], Value = [0.6, 0.4, 0.9]
 
-"on": Query = [0.5, 0.2, 0.3], Key = [0.6, 0.4, 0.2], Value = [0.7, 0.5, 0.8]
 
-"the": Query = [0.3, 0.1, 0.5], Key = [0.4, 0.2, 0.6], Value = [0.8, 0.6, 0.9]
 
 ## Similarity Calculation
 
@@ -61,6 +57,18 @@ Weighted Sum (sitting, The)=Softmax (sitting, The)×Value (The)
 Weighted Sum (sitting, dog)=Softmax (sitting, dog)×Value (dog)
 
 
-Weighted Sum (sitting, The)≈0.4×[0.3,0.2,0.8]
+Weighted Sum (sitting, The)≈0.4×[0.3,0.2,0.8] = [0.12, 0.08, 0.32]
 
-Weighted Sum (sitting, dog)≈0.6×[0.5,0.3,0.9]
+Weighted Sum (sitting, dog)≈0.6×[0.5,0.3,0.9] = [0.3, 0.18, 0.54]
+
+
+Weighted sum = [0.12 + 0.3, 0.08 + 0.18, 0.32 + 0.54] = [0.42, 0.26, 0.86]
+
+This resulting vector [0.42, 0.26, 0.86] represents the context or information that the model considers most relevant for the word "sitting" based on the attention mechanism (how much the word is related to other words of sentence)
+
+## Word Generation
+After the 
+
+
+
+

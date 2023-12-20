@@ -14,8 +14,25 @@ Self-attention allows each word/token in a sequence to consider dependencies bet
 In traditional attention mechanisms, such as those used in sequence-to-sequence models like the encoder-decoder architecture in machine translation, attention helps the model focus on specific parts of the input sequence while generating the output sequence. However, self-attention, introduced in models like the Transformer, allows each element in a sequence to attend to all other elements in the same sequence. This means that every word in an input sentence, for example, can be connected to and influence the representation of every other word in the sentence.
 
 # Self Attention Numeric Example
-In Self-Attnetion process uses below formula where Q is the query of focused word, K^T is matrix of other words (rest of input tokens) keys and V represents the vector of all values (including the attended word).
+In Self-Attnetion process uses below formula where Q is the query of focused word, K^T is matrix of other words (rest of input tokens) keys, d_k is dimension of the key matrix (to avoid huge numbers) and V represents the vector of all values (including the attended word).
 
 Attention(Q, K) = softmax( QK^T / sqrt(d_k) ) * V
 
+# Steps
+## Input Encoding
+Sentence: "The dog is sitting on the mat."
+This sentence gets broken into tokens (words or subwords) and then embedded into vectors. Each token (word) has three vector 
+
+representations: Query, Key, and Value.
+
+For instance:
+"The": Query vector = [0.2, 0.5, 0.1], Key vector = [0.1, 0.3, 0.6], Value vector = [0.3, 0.2, 0.8]
+
+## Similarity Calculation
+
+To determine which words are important for each word in the sentence, the model computes the similarity (often using dot product) between the query of the word it's focusing on and the keys of all other words in the sentence.
+
+For example, if the model is focusing on "sitting":
+Dot product of "sitting's Query" with "the's Key" = 0.2 * 0.1 + 0.5 * 0.3 + 0.1 * 0.6 = 0.17
+Dot product of "sitting's Query" with "dog's Key" = 0.2 * cat's 0.1 + 0.5 * 0.3 + 0.1 * 0.6 = 0.15
 

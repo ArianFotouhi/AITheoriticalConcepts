@@ -67,7 +67,6 @@ Weighted sum = [0.12 + 0.3, 0.08 + 0.18, 0.32 + 0.54] = [0.42, 0.26, 0.86]
 This resulting vector [0.42, 0.26, 0.86] represents the context or information that the model considers most relevant for the word "sitting" based on the attention mechanism (how much the word is related to other words of sentence)
 
 ## Word Generation
-After the 
 
 
 

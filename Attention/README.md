@@ -26,13 +26,41 @@ This sentence gets broken into tokens (words or subwords) and then embedded into
 representations: Query, Key, and Value.
 
 For instance:
-"The": Query vector = [0.2, 0.5, 0.1], Key vector = [0.1, 0.3, 0.6], Value vector = [0.3, 0.2, 0.8]
+"The": Query = [0.2, 0.5, 0.1], Key = [0.1, 0.3, 0.6], Value = [0.3, 0.2, 0.8]
+
+"dog": Query = [0.4, 0.6, 0.2], Key = [0.2, 0.4, 0.7], Value = [0.5, 0.3, 0.9]
+
+"is": Query = [0.1, 0.3, 0.2], Key = [0.3, 0.5, 0.4], Value = [0.2, 0.1, 0.7]
+
+"sitting": Query = [0.3, 0.4, 0.1], Key = [0.4, 0.3, 0.5], Value = [0.6, 0.4, 0.9]
+
+"on": Query = [0.5, 0.2, 0.3], Key = [0.6, 0.4, 0.2], Value = [0.7, 0.5, 0.8]
+
+"the": Query = [0.3, 0.1, 0.5], Key = [0.4, 0.2, 0.6], Value = [0.8, 0.6, 0.9]
 
 ## Similarity Calculation
 
 To determine which words are important for each word in the sentence, the model computes the similarity (often using dot product) between the query of the word it's focusing on and the keys of all other words in the sentence.
 
-For example, if the model is focusing on "sitting":
-Dot product of "sitting's Query" with "the's Key" = 0.2 * 0.1 + 0.5 * 0.3 + 0.1 * 0.6 = 0.17
-Dot product of "sitting's Query" with "dog's Key" = 0.2 * cat's 0.1 + 0.5 * 0.3 + 0.1 * 0.6 = 0.15
+for example, dot product between the Query vector of "sitting" and the Key vectors of "The" and "dog."
 
+Dot Product (sitting, The)=0.3×0.1+0.4×0.3+0.1×0.6=0.13
+
+Dot Product (sitting, dog)=0.3×0.2+0.4×0.4+0.1×0.7=0.26
+ 
+(assuming d_k​ =3) and apply the softmax function to obtain attention weights for each word.
+
+Softmax (sitting, The)=softmax(0.13/3)
+
+Softmax (sitting, dog)=softmax(0.26/3)
+
+## Weighted Sum
+
+Weighted Sum (sitting, The)=Softmax (sitting, The)×Value (The)
+
+Weighted Sum (sitting, dog)=Softmax (sitting, dog)×Value (dog)
+
+
+Weighted Sum (sitting, The)≈0.4×[0.3,0.2,0.8]
+
+Weighted Sum (sitting, dog)≈0.6×[0.5,0.3,0.9]
